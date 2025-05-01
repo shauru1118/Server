@@ -1,21 +1,21 @@
 from flask import Flask, send_from_directory, abort
 import os
 
-app = Flask(__name__)
+App = Flask(__name__)
 
 VIEWS_DIR = os.path.join(os.path.dirname(__file__), "views")
 
 
-@app.route("/app")
+@App.route("/app")
 def app():
     return "App success."
 
-@app.route("/")
-@app.route("/home")
+@App.route("/")
+@App.route("/home")
 def home():
     return send_from_directory(VIEWS_DIR, "index.html")
 
-@app.route("/<path:filename>")
+@App.route("/<path:filename>")
 def serve_page(filename):
     filepath = os.path.join(VIEWS_DIR, filename)
     if os.path.exists(filepath):
@@ -26,4 +26,4 @@ def serve_page(filename):
 if __name__ == "__main__":
     print(VIEWS_DIR)
     port = int(os.environ.get("PORT", 8080))
-    app.run(host="0.0.0.0", port=port)
+    App.run(host="0.0.0.0", port=port)

@@ -5,6 +5,11 @@ app = Flask(__name__)
 
 VIEWS_DIR = os.path.join(os.path.dirname(__file__), "views")
 
+
+@app.route("/app")
+def app():
+    return "App success."
+
 @app.route("/")
 @app.route("/home")
 def home():

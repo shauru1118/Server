@@ -1,4 +1,4 @@
-from flask import Flask, send_from_directory, abort, render_template, url_for
+from flask import Flask, send_from_directory, abort, render_template, url_for, redirect
 import os
 from time import sleep
 
@@ -17,7 +17,7 @@ def index():
 def app():
     return render_template("app.html")
 
-@App.route("/not_found  ")
+@App.route("/not_found")
 def not_found():
     return render_template("not_found.html"), 404
 
@@ -39,3 +39,5 @@ if __name__ == "__main__":
     
     while True:
         App.run(host="0.0.0.0", port=port, debug=True)
+        break
+        

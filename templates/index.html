@@ -5,5 +5,16 @@
 {% block content %}
 <h1> Main page </h1>
 <b><a href="index.html">MAIN PAGE</a></b>
+<input type="button" id="btn" value="rndd">
+<p id="p"></p>
 
+<script>
+    document.getElementById("btn").addEventListener("click", function () {
+        fetch("https://shauru.up.railway.app/random_number", {
+            method: "GET"
+        })
+            .then(response => response.text())
+            .then(data => document.getElementById("p").innerText = data)
+    })
+</script>
 {% endblock %}

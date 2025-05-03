@@ -1,11 +1,12 @@
 from flask import Flask, send_from_directory, abort, render_template, url_for, redirect
 import os
 from time import sleep
+from random import randint
+
 
 App = Flask(__name__)
 
 VIEWS_DIR = os.path.join(os.path.dirname(__file__), "templates")
-
 
 
 @App.route("/")
@@ -24,6 +25,10 @@ def not_found():
 @App.route("/user/<username>/<id>")
 def user(username, id):
     return f"<h1>Hello |{username}| with id |{id}| !</h1>"
+
+@App.route("/random_number")
+def random_number():
+    return str(randint(1, 100))
 
 @App.route("/<path:filename>")
 def serve_page(filename):

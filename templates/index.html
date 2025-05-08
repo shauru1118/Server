@@ -10,7 +10,7 @@
 
 <script>
     document.getElementById("btn").addEventListener("click", function () {
-        fetch("https://shauru.up.railway.app/random_number", {
+        fetch("https://shauru.up.railway.app/api/random_number", {
             method: "GET"
         })
             .then(response => response.text())

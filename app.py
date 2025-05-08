@@ -55,9 +55,9 @@ def login():
 def not_found():
     return render_template("not_found.html"), 404
 
-@App.route("/user/<username>/<id>")
-def user(username, id):
-    return f"<h1>Hello |{username}| with id |{id}| !</h1>"
+@App.route("/about")
+def about():
+    return render_template("about.html")
 
 @App.route("/<path:filename>")
 def serve_page(filename):

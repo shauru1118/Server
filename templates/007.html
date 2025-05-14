@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block title %} Case Pidoras {% endblock %}
+
+{% block content %}
+
+<div class="case-container">
+    <div class="case-strip" id="case-strip"></div>
+</div>
+
+<button onclick="rollCase()">Открыть кейс</button>
+
+<script>
+    const images = [
+        "images/item1.jpg",
+        "images/item2.jpg",
+        "images/item3.jpg",
+        "images/item4.jpg",
+        "images/item5.jpg"
+    ];
+
+    function rollCase() {
+        const strip = document.getElementById("case-strip");
+        strip.innerHTML = "";
+        strip.style.transition = "none";
+        strip.style.transform = "translateX(0)";
+
+        const imagesToShow = [];
+        const totalItems = 30;
+        const itemWidth = 100;
+        const visibleItems = 5;
+        const centerIndex = visibleItems / 2;
+        const stopIndex = totalItems - centerIndex - 1;
+        const offset = stopIndex * itemWidth;
+
+        for (let i = 0; i < totalItems; i++) {
+            const img = document.createElement("img");
+            img.src = images[Math.floor(Math.random() * images.length)];
+            img.className = "item";
+            imagesToShow.push(img);
+        }
+
+        imagesToShow.forEach(img => strip.appendChild(img));
+
+        setTimeout(() => {
+            strip.style.transition = "transform 3s ease-out";
+            strip.style.transform = `translateX(-${offset}px)`;
+        }, 30);
+    }
+
+</script>
+{% endblock %}

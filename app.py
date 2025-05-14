@@ -59,6 +59,15 @@ def not_found():
 def about():
     return render_template("about.html")
 
+@App.route("/cases")
+def case():
+    return render_template("cases.html")
+
+@App.route("/cases/<casename>")
+def contact(casename):
+    return render_template(f"{casename}.html")
+
+
 @App.route("/<path:filename>")
 def serve_page(filename):
     filepath = os.path.join(VIEWS_DIR, filename)
@@ -105,4 +114,3 @@ if __name__ == "__main__":
     while True:
         App.run(host="0.0.0.0", port=port, debug=True)
         break
-

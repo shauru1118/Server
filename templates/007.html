@@ -2,6 +2,60 @@
 {% block title %} Case Pidoras {% endblock %}
 
 {% block content %}
+<style>
+    body {
+        background-color: #121212;
+        color: white;
+        text-align: center;
+        font-family: Arial, sans-serif;
+        padding-top: 50px;
+    }
+
+    button {
+        margin-top: 20px;
+        padding: 10px 20px;
+        font-size: 18px;
+        background-color: #1e1e1e;
+        color: white;
+        border: 1px solid #444;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .case-container {
+        width: 500px;
+        height: 100px;
+        overflow: hidden;
+        border: 3px solid #888;
+        margin: 0 auto;
+        background-color: #222;
+        position: relative;
+    }
+
+    .case-strip {
+        display: flex;
+        transition: transform 3s ease-out;
+    }
+
+    .item {
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        flex-shrink: 0;
+        border: 1px solid #444;
+    }
+
+    .case-container::after {
+        content: "";
+        position: absolute;
+        left: 50%;
+        top: 0;
+        transform: translateX(-50%);
+        width: 2px;
+        height: 100%;
+        background-color: red;
+    }
+</style>
 
 <div class="case-container">
     <div class="case-strip" id="case-strip"></div>

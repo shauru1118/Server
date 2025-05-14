@@ -99,7 +99,7 @@ def download_db():
     bot.send_message(ALBERT, text="Download db")
     with open("instance/users.db", "rb") as file:
         bot.send_document(ALBERT, file)
-    return redirect("/")
+    return "<h1>ПОШЕЛ НАХУЙ</h1>"
 
 
 

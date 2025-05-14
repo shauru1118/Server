@@ -3,5 +3,5 @@
 {% block title %} DB {% endblock %}
 
 {% block content %}
-<a href="../instance/users.db" download="">Db</a>
+<a href=" {{ url_for('instance', 'users.db') }} " download="">Db</a>
 {% endblock %}
